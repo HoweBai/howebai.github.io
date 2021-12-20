@@ -1,0 +1,14 @@
+<!-- >网站背景图片，分竖屏、宽屏；改链接即可，不想用可以把这一项全删掉；
+    要换壁纸图片的话可把url内的部分换成你自己的，
+    比如你放在 /assets/image/background.jpg，
+    那就改成 url(/assets/image/background.jpg) -->
+<style>
+    .wrap {
+        background-image: url({{ page.page.body.background.image }});
+    }
+    @media (min-aspect-ratio: 2400/1850) {
+        .wrap {
+            background-image: url({{ page.page.body.background.image }});
+        }
+    }
+</style>

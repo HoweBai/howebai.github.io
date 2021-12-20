@@ -1,0 +1,23 @@
+<!-- >对KaTeX过长公式渲染超出页面的修正，
+    感谢[@AmachiInori](https://github.com/wu-kan/wu-kan.github.io/issues/13) -->
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+/>
+<style>
+    .katex-display>.katex {
+        white-space: normal;
+    }
+</style>
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/katex@0.15.1/dist/katex.min.js,npm/katex@0.15.1/dist/contrib/auto-render.min.js"
+    async="async"
+    onload='renderMathInElement(document.body, { 
+        delimiters: [
+            {left: "$$", right: "$$", display: true}, 
+            { left: "$", right: "$", display: false }, 
+            {left: "\\(", right: "\\)", display: false}, 
+            {left: "\\[", right: "\\]", display: true}
+            ]
+        })'
+></script>

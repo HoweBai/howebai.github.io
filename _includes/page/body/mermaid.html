@@ -1,0 +1,47 @@
+<style>
+    pre.language-mermaid,
+    code.language-mermaid {
+        display: none;
+    }
+    @media only screen {
+        .mermaid {
+        overflow: hidden hidden;
+        max-width: 100%;
+        max-height: 66.6vh;
+        }
+        .mermaid {
+            overflow: auto auto;
+        }
+    }
+</style>
+<script
+    src="https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js"
+    async="async"
+    onload='
+        for(let x of document.getElementsByClassName("language-mermaid"))
+        if(x.nodeName=="CODE")
+        {
+            let m = document.createElement("div");
+            m.classList.add("mermaid");
+            m.textContent = x.textContent;
+            x.parentNode.insertAdjacentElement("beforebegin", m);
+        }'
+></script>
+<style>
+    pre.language-vega-lite,
+    code.language-vega-lite {
+        display: none;
+    }
+</style>
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/vega@5.20.2,npm/vega-lite@5.1.1,npm/vega-embed@6.18.2"
+    async="async"
+    onload='
+        for(let x of document.getElementsByClassName("language-vega-lite"))
+        if(x.nodeName=="CODE")
+        {
+            let m = document.createElement("div");
+            x.parentNode.insertAdjacentElement("beforebegin", m);
+            vegaEmbed(m, JSON.parse(x.textContent));
+        }'
+></script>

@@ -1,0 +1,72 @@
+---
+    layout: page
+---
+<!-- 标题下面那些东西 -->
+{% if page.post.enable %}
+    <div class="post">
+        <span class="post-date">
+            <!-- 显示博文时间 -->
+            {% if page.post.date.enable %}
+                <i class="fas fa-calendar-day fa-fw"></i>
+                {{ page.date | date_to_string }}
+            {% endif %}
+
+            <!-- 字数统计 -->
+            {% if page.post.wordcount.enable %}
+                <i class="fas fa-file-word fa-fw"></i>
+                {{ page.content | strip_html | strip_newlines | remove: " " | size }}
+                {{ page.post.wordcount.unit }}
+            {% endif %}
+
+            <!-- 文章阅读时间 -->
+            {% if page.post.readtime.enable %}
+                <i class="fas fa-clock fa-fw"></i>
+                {{ page.content | strip_html | strip_newlines | remove: " " | size | divided_by:page.post.readtime.divided_by | plus: 1 }}
+                {{ page.post.readtime.unit }}
+            {% endif %}
+
+            <!-- 标签 -->
+            {% if page.post.tag.enable %}
+                {% if page.tags.size > 0 %}
+                    <i class="fas fa-tags fa-fw"></i>
+                    {{ page.tags | array_to_sentence_string }}
+                {% endif %}
+            {% endif %}
+
+            <!-- 版权声明 -->
+            {% if page.post.copyright.endble %}
+                {% include post/copyright.html %}
+            {% endif %}
+            
+            <!-- 背景音乐 -->
+            {% if page.music.enable %}
+                
+            {% endif %}
+        </span>
+        {{ content }}
+    </div>
+{% endif %}
+
+<!-- 关联文章 -->
+{% if page.post.related_posts.enable %}
+    {% if site.related_posts.size >= 1 %}
+        <div class="related">
+            <h2>Related posts</h2>
+            <ul class="related-posts">
+                {% for post in site.related_posts limit:3 %}
+                <li>
+                    <h3>
+                        <a href="{{ site.baseurl }}{{ post.url }}">
+                        {{ post.title }}
+                        <small>{{ post.date | date_to_string }}</small>
+                        </a>
+                    </h3>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- 留言栏 -->
+{% include comments/body.html %}

@@ -1,56 +1,113 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+title: Howe's Blog
+url: https://howebai.github.io
+baseurl: ""
 
-title: Your awesome title
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-domain: howebai.github.io
-baseurl: "" # the subpath of your site, e.g. /blog
-url: https://howebai.github.io # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+defaults:
+  -
+    scope: 
+      path: ""
+    values:
+      default:
+        header:
+          icon: "/assets/res/tab_icon/icon.ico"  # 标签页的图标
+        body:
+          default-theme: theme-base-0d  # 可选的主题色包括08~0f，见 <https://github.com/poole/lanyon>
+          layout-reverse: false         # 反转布局，开启后sidebar在右边，反之左边
+          sidebar-overlay: false         # 开启后正文不随sidebar移动而移动
+          sidebar-enable: true          # 是否启用sidebar
+        sidebar:
+          open: true        # 是否默认打开
+          avatar:     # 侧边栏显示的头像
+            enable: true    
+            img: /assets/res/head_img/icon.jpg # 头像的地址
+            description: default/common/description.html    # 头像后面的描述
+          search:     # 侧边栏全站搜索
+            enable: true
+            full_text_search: false    # 可能导致缓慢的搜索和加载
+            default-text: "搜索博文~"
+          navigate:
+            enable: true
+            content:  # 导航部分的内容，你也可以自己增加文字、图标（来自fontawesome）和对应的链接
+              - name: "home"    # 首页
+                enable: true
+                title: '<i class="fas fa-home fa-fw"></i> 首页'      
+                href: /
+              - name: "tag"     # 标签分类
+                enable: true
+                title: '<i class="fas fa-tags fa-fw"></i> 分类'
+                href: /tags/
+              - name: "archive" # 归档
+                enable: true
+                title: '<i class="fas fa-archive fa-fw"></i> 归档'
+                href: /archive/
+              - name: "comment" # 留言
+                enable: true
+                title: '<i class="fas fa-comments fa-fw"></i> 留言'
+                href: /comments/
+              - name: "coffee"  # 打赏
+                enable: true
+                title: '<i class="fas fa-coffee fa-fw"></i> 打赏'
+                href: /coffee/
+          toc:
+            enable: true
+          time:       # 时间信息
+            enable: true
+            time-point: "12/07/10 00:00:00" # 计时的起点
+          statistics: # 统计信息
+            enable: false
+          other:      # 备案信息等
+            enable: false
+          wordcount:  # 全站字数统计
+            enable: false  # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
+        footer:
+          enable: false
+      page:
+        body: 
+          background: 
+            enable: true
+            image: /assets/res/background/820989.jpg    # 背景图片
+          content:
+            color: rgba(0,0,0,1)   # 正文颜色
+            background-color: rgba(255,255,255,0.9)     # 正文背景颜色
+            shadow-color:  rgba(106,159,181,0.5)        # 正文背景影子
+            animation-duration: 5s # 正文背景动画时间
+        live2d:  # 看板娘
+          enable: true
+          position: right   # right/left
+        katex:   # 公式插件
+          enable: true
+        mermaid: # 画图插件
+          enable: true
+      comments:  # 留言页, 是否启用由navigate的content控制
+        repository: Howebai/howebai.github.io
+      post:
+        enable: true
+        date:      # 显示博文时间
+          enable: true
+        wordcount: # 统计全文字数
+          enable: true
+          prepend: 
+          unit: 字
+        readtime:  # 计算文章阅读时间
+          enable: true
+          unit: 分
+          divided_by: 300 # 正常人的阅读速度大概每分钟三百个字
+        tag:       # 标签显示
+          enable: true
+        copyright: # 版权声明
+          enable: true
+        music:    # 还不支持
+          enable: false
+        related_posts:    # 关联文章
+          enable: true
 
-# Build settings
-theme: minima
-plugins:
-  - jekyll-feed
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+compress_html: # <https://github.com/penibelst/jekyll-compress-html>
+  clippings: all
+  comments: [] # 注释不能压缩，否则 reveal.js 的 ppt切屏受影响
+  endings: all
+  ignore:
+    envs: all # 暂时关掉页面压缩
+  blanklines: false
+  profile: false
+  startings: []

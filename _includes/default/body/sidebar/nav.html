@@ -1,0 +1,14 @@
+<!--导航栏-->
+<nav class="sidebar-nav">
+    {% for node in page.default.sidebar.navigate.content %}
+        {% if node.enable %}
+            <a class="sidebar-nav-item 
+                {% if page.url == node.href %}
+                    active
+                {% endif %}"
+                href="{{ node.href }}">
+                {{ node.title }}
+            </a>
+        {% endif %}
+    {% endfor %}
+</nav>

@@ -1,0 +1,42 @@
+<!-- 增加宽屏下的显示内容 -->
+<style>
+    .container {
+        min-width: 66.6%;
+        min-height: 100vh;
+    }
+    @media only print {
+        .container {
+            min-width: 100%;
+        }
+    }
+</style>
+
+<!-- 背景设置 -->
+{% if page.page.body.background.enable %}
+    {% include page/body/background.html %}
+{% endif %}
+
+<!--正文设置-->
+{% include page/body/content.html %}
+
+<!-- live2d -->
+{% if page.page.live2d.enable %}
+    {% include page/body/live2d.html %}
+{% endif %}
+
+<!-- 正文内容 -->
+<div class="container content">
+    <div class="page">
+        <h1 class="page-title">{{ page.title }}</h1>
+        {{ content }}
+    </div>
+</div>
+
+<!--katex公式-->
+{% if page.page.katex.enable %}
+    {% include page/body/katex.html %}
+{% endif %}
+<!--mermaid画图-->
+{% if page.mermaid.enable %}
+    {% include page/body/mermaid.html %}
+{% endif %}

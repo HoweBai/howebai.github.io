@@ -1,0 +1,45 @@
+<!-- 是否默认打开 -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" 
+    {% if page.default.sidebar.open %}
+        checked
+    {% endif %} />
+<!--侧边栏-->
+<div class="sidebar" id="sidebar">
+    <!--侧边栏显示的头像-->
+    {% if page.default.sidebar.avatar.enable %}
+        {% include default/body/sidebar/avatar.html %}  
+    {% endif %}
+    <!--searchl栏-->
+    {% if page.default.sidebar.search.enable %}
+        {% include default/body/sidebar/search.html %}
+    {% endif %}
+    <!--导航栏-->
+    {% if page.default.sidebar.navigate.enable %}
+        {% include default/body/sidebar/nav.html %}
+    {% endif %}
+    <!--其他部分-->
+    <div class="sidebar-item">
+        <!--目录栏-->
+        {% if page.default.sidebar.toc.enable %}
+            {% include default/common/toc.html html=content ordered=true skipNoIDs=true sanitize=true id="toc" %}
+        {% endif %}
+        <!--运行时间-->
+        {% if page.default.sidebar.time.enable %}
+            {% include default/body/sidebar/time.html %}
+        {% endif %}
+        <!--页面统计-->
+        {% if page.default.sidebar.statistics.enable %}
+            {% include default/body/sidebar/statistics.html %}
+        {% endif %}
+        <!--其他信息，备案信息等-->
+        {% if page.default.sidebar.other.enable %}
+            {% include default/body/sidebar/other.html %}
+        {% endif %}
+        <!-- sidebar样式-->
+        {% include default/body/sidebar/sidebar-style.html %} 
+        <!--字数统计-->
+        {% if page.default.sidebar.wordcount.enable %}
+            {% include default/body/sidebar/wordcount.html %}
+        {% endif %}
+    </div>
+</div>

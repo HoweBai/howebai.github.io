@@ -1,0 +1,19 @@
+<!--字数统计-->
+<div>
+    <i class="fas fa-user-edit fa-fw"></i>
+    {% assign count = 0 %}
+    {% for post in site.posts %}
+    {% assign single_count = post.content | strip_html | strip_newlines | remove: " " | size %}
+    {% assign count = count | plus: single_count %}
+    {% endfor %}
+    {% for post in site.pages %}
+    {% assign single_count = post.content | strip_html | strip_newlines | remove: " " | size %}
+    {% assign count = count | plus: single_count %}
+    {% endfor %}
+    {% if count > 1000 %}
+    {{ count | divided_by: 1000 }}{{ page.default.sidebar.wordcount.kilo }}
+    {{ count | modulo: 1000 }}{{ page.default.sidebar.wordcount.unit }}
+    {% else %}
+    {{ count }}{{ page.default.sidebar.wordcount.unit }}
+    {% endif %}
+</div>

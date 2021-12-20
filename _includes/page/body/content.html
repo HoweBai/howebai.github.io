@@ -1,0 +1,19 @@
+<!-- 给文章加上磨砂背景，防止被背景影响阅读；同时加上加载动画 -->
+<style>
+    .container.content {
+        padding: 2rem;
+        box-shadow: 0 0 2rem {{ page.page.body.content.shadow-color }};
+        color: {{ page.page.body.content.color }};
+        background-color: {{ page.page.body.content.background-color }};
+        animation-duration: {{ page.page.body.content.animation-duration }};
+        animation-name: fadeIn;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>

@@ -1,0 +1,18 @@
+---
+layout: page
+---
+{% comment %}
+    留言页，判断comments是否启用
+{% endcomment %}
+{% assign comment-enable = false %}
+{% for node in page.default.sidebar.navigate.content %}
+    {% if node.name == "comment" and node.enable%}
+        {% assign comment-enable = true %}
+    {% break %}
+    {% endif %}
+{% endfor %}
+
+{% if comment-enable %}
+    {{ content }}
+    {% include comments/body.html %}
+{% endif %}
