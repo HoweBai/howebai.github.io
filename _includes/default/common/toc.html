@@ -74,7 +74,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             * id           (string) :   ''   - an ID to assigned to the TOC
             * h_min        (int)    :   1    - the minimum TOC header level to use; any header lower than this value will be ignored
             * h_max        (int)    :   6    - the maximum TOC header level to use; any header greater than this value will be ignored
-            * ordered      (bool)   : false  - when set to true, an ordered list will be outputted instead of an unordered list
+            * order-enable (bool)   ：false  - 是否启用标题顺序
+            * order        (bool)   : false  - when set to true, an ordered list will be outputted instead of an unordered list
             * item_class   (string) :   ''   - add custom class(es) for each list item; has support for '%level%' placeholder, which is the current heading level
             * baseurl      (string) :   ''   - add a base url to the TOC links for when your TOC is on another page than the actual content
             * anchor_class (string) :   ''   - add custom class(es) for each anchor element
@@ -86,6 +87,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     {% endcomment %}
 
     {% capture my_toc %}{% endcapture %}
+    {% assign isFirstToc = true %}
+    {% assign orderEnable = include.order-enable | default: false %}
     {% assign orderedList = include.ordered | default: false %}
     {% assign skipNoIDs = include.skipNoIDs | default: false %}
     {% assign minHeader = include.h_min | default: 1 %}
@@ -93,8 +96,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     {% assign nodes = include.html | split: '<h' %}
     {% assign firstHeader = true %}
 
-    {% capture listModifier %}{% if orderedList %}1.{% else %}-{% endif %}{% endcapture %}
-
+    {% capture listModifier %}{% if orderEnable %}{% if orderedList %}1.{% else %}-{% endif %}{% else %} {% endif %}{% endcapture %}
     {% for node in nodes %}
         {% if node == "" %}
             {% continue %}
@@ -138,7 +140,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         {% assign space = '' %}
         {% for i in (1..indentAmount) %}
+            {% if orderEnable %}
             {% assign space = space | prepend: '    ' %}
+            {% else %}
+            {% assign space = space | prepend: '&emsp;' %}
+            {% endif %}
         {% endfor %}
 
         {% if include.item_class and include.item_class != blank %}
@@ -154,7 +160,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             {% capture list_item %}{{ anchor_body }}{% endcapture %}
         {% endif %}
 
-        {% capture my_toc %}{{ my_toc }}
+        {% capture my_toc %}{{ my_toc }}{% unless orderEnable %}<br/>{% if isFirstToc %}{% assign isFirstToc = false %}{% else %}{% if indentAmount == 0 %}<br/>{% endif %}{% endif %}{% endunless %}
 {{ space }}{{ listModifier }} {{ listItemClass }} {{ list_item }}{% if include.anchor_class %}{:.{{ include.anchor_class }}}{% endif %}{% endcapture %}
     {% endfor %}
 

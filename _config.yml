@@ -50,6 +50,12 @@ defaults:
                 href: /coffee/
           toc:
             enable: true
+            sanitize: true  # when set to true, the headers will be stripped of any HTML in the TOC
+            h_min: 2        # the minimum TOC header level to use; any header lower than this value will be ignored
+            h_max: 6        # the maximum TOC header level to use; any header greater than this value will be ignored
+            order-enable: false # 是否启用标题顺序
+            ordered: true   # 启用标题顺序后，是有序还是无序的 when set to true, an ordered list will be outputted instead of an unordered list
+            skipNoIDs: false # skip headers that do not have an `id` attribute
           time:       # 时间信息
             enable: true
             time-point: "12/07/10 00:00:00" # 计时的起点

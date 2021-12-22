@@ -21,7 +21,8 @@
     <div class="sidebar-item">
         <!--目录栏-->
         {% if page.default.sidebar.toc.enable %}
-            {% include default/common/toc.html html=content ordered=true skipNoIDs=true sanitize=true id="toc" %}
+            {% assign toc_setting = page.default.sidebar.toc %}
+            {% include default/common/toc.html html=content sanitize=toc_setting.sanitize h_min=toc_setting.h_min h_max=toc_setting.h_max order-enable=toc_setting.order-enable ordered=toc_setting.ordered skipNoIDs=toc_setting.skipNoIDs id="toc" %}      
         {% endif %}
         <!--运行时间-->
         {% if page.default.sidebar.time.enable %}
