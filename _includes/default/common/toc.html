@@ -160,7 +160,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             {% capture list_item %}{{ anchor_body }}{% endcapture %}
         {% endif %}
 
-        {% capture my_toc %}{{ my_toc }}{% unless orderEnable %}<br/>{% if isFirstToc %}{% assign isFirstToc = false %}{% else %}{% if indentAmount == 0 %}<br/>{% endif %}{% endif %}{% endunless %}
+        {% capture my_toc %}{{ my_toc }}{% if isFirstToc %}{% assign isFirstToc = false %}{% else %}{% unless orderEnable %}<br/>{% if indentAmount == 0 %}<br/>{% endif %}{% endunless %}{% endif %}
 {{ space }}{{ listModifier }} {{ listItemClass }} {{ list_item }}{% if include.anchor_class %}{:.{{ include.anchor_class }}}{% endif %}{% endcapture %}
     {% endfor %}
 
