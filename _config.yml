@@ -58,13 +58,13 @@ defaults:
             skipNoIDs: false # skip headers that do not have an `id` attribute
           time:       # 时间信息
             enable: true
-            time-point: "12/07/10 00:00:00" # 计时的起点
+            time-point: "12/25/2021 00:00:00" # 计时的起点
           statistics: # 统计信息
-            enable: false
+            enable: true
           other:      # 备案信息等
             enable: false
           wordcount:  # 全站字数统计
-            enable: false  # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
+            enable: true  # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
         footer:
           enable: false
       page:
